@@ -1,0 +1,14 @@
+C:\Users\reyna\proyectoequipo\proyectoequipo.ORM\bin\Debug\net10.0\proyectoequipo.ORM.deps.json
+C:\Users\reyna\proyectoequipo\proyectoequipo.ORM\bin\Debug\net10.0\proyectoequipo.ORM.runtimeconfig.json
+C:\Users\reyna\proyectoequipo\proyectoequipo.ORM\bin\Debug\net10.0\proyectoequipo.ORM.dll
+C:\Users\reyna\proyectoequipo\proyectoequipo.ORM\bin\Debug\net10.0\proyectoequipo.ORM.pdb
+C:\Users\reyna\proyectoequipo\proyectoequipo.ORM\obj\Debug\net10.0\proyectoequipo.ORM.csproj.AssemblyReference.cache
+C:\Users\reyna\proyectoequipo\proyectoequipo.ORM\obj\Debug\net10.0\proyectoequipo.ORM.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\reyna\proyectoequipo\proyectoequipo.ORM\obj\Debug\net10.0\proyectoequipo.ORM.AssemblyInfoInputs.cache
+C:\Users\reyna\proyectoequipo\proyectoequipo.ORM\obj\Debug\net10.0\proyectoequipo.ORM.AssemblyInfo.cs
+C:\Users\reyna\proyectoequipo\proyectoequipo.ORM\obj\Debug\net10.0\proyectoequipo.ORM.csproj.CoreCompileInputs.cache
+C:\Users\reyna\proyectoequipo\proyectoequipo.ORM\obj\Debug\net10.0\proyectoequipo.ORM.dll
+C:\Users\reyna\proyectoequipo\proyectoequipo.ORM\obj\Debug\net10.0\refint\proyectoequipo.ORM.dll
+C:\Users\reyna\proyectoequipo\proyectoequipo.ORM\obj\Debug\net10.0\proyectoequipo.ORM.pdb
+C:\Users\reyna\proyectoequipo\proyectoequipo.ORM\obj\Debug\net10.0\proyectoequipo.ORM.genruntimeconfig.cache
+C:\Users\reyna\proyectoequipo\proyectoequipo.ORM\obj\Debug\net10.0\ref\proyectoequipo.ORM.dll
