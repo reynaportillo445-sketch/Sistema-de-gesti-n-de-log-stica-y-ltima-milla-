@@ -1,0 +1,26 @@
+body {
+    background-color: #0f172a !important;
+}
+
+/* fondo general */
+.swagger-ui {
+    background-color: #0f172a !important;
+    color: #e5e7eb !important;
+}
+
+/* top bar */
+.swagger-ui .topbar {
+    background-color: #020617 !important;
+    border-bottom: 2px solid #22c55e;
+}
+
+/* textos */
+.swagger-ui .info hgroup.main h2 {
+    color: #22c55e !important;
+}
+
+/* botones */
+.swagger-ui .btn {
+    background-color: #22c55e !important;
+    border-radius: 8px;
+}
