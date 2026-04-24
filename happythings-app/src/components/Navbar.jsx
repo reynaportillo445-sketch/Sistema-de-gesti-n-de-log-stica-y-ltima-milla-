@@ -29,6 +29,25 @@ export default function Navbar() {
     navigate('/');
   };
 
+  // Función para navegar al dashboard correcto según el rol de tu App.jsx
+  const handleDashboardNavigation = () => {
+    if (!user) return;
+    setMenuOpen(false);
+
+    switch (user.role) {
+      case 'admin':
+        navigate('/dashboard/admin');
+        break;
+      case 'driver':
+        navigate('/dashboard/driver');
+        break;
+      case 'customer':
+      default:
+        navigate('/dashboard/customer');
+        break;
+    }
+  };
+
   const categories = ['Todo', 'Tecno', 'Hogar', 'Accesorios', 'Ropa', 'Tools'];
 
   return (
@@ -60,12 +79,14 @@ export default function Navbar() {
                       {user.name || 'Usuario'}
                     </p>
                   </div>
+                  
+                  {/* ICONO DE USUARIO (Manda al Dashboard) */}
                   <button 
-                    onClick={handleLogout}
-                    className="p-2 text-danger/70 hover:text-danger hover:bg-danger/10 rounded-lg transition"
-                    title="Cerrar Sesión"
+                    onClick={handleDashboardNavigation}
+                    className="p-2 text-accent hover:bg-accent/10 rounded-lg transition"
+                    title="Ir a mi Dashboard"
                   >
-                    <LogOut size={18} />
+                    <User size={20} />
                   </button>
                 </div>
               )}
@@ -111,19 +132,34 @@ export default function Navbar() {
         {/* MENÚ MÓVIL DESPLEGABLE */}
         {menuOpen && (
           <div className="sm:hidden border-t border-white/5 bg-secondary/95 p-4 space-y-3 animate-in slide-in-from-top duration-300">
-             {!user && (
-               <button 
-                 onClick={() => { navigate('/login'); setMenuOpen(false); }}
-                 className="w-full py-3 bg-accent text-primary font-bold rounded-xl flex items-center justify-center gap-2"
-               >
-                 <User size={18} /> Iniciar Sesión
-               </button>
-             )}
+              {!user ? (
+                <button 
+                  onClick={() => { navigate('/login'); setMenuOpen(false); }}
+                  className="w-full py-3 bg-accent text-primary font-bold rounded-xl flex items-center justify-center gap-2"
+                >
+                  <User size={18} /> Iniciar Sesión
+                </button>
+              ) : (
+                <div className="flex flex-col gap-2">
+                  <button 
+                    onClick={handleDashboardNavigation}
+                    className="w-full py-3 bg-accent/20 text-accent font-bold rounded-xl flex items-center justify-center gap-2"
+                  >
+                    <User size={18} /> Mi Dashboard
+                  </button>
+                  <button 
+                    onClick={handleLogout}
+                    className="w-full py-3 bg-danger/10 text-danger font-bold rounded-xl flex items-center justify-center gap-2"
+                  >
+                    <LogOut size={18} /> Cerrar Sesión
+                  </button>
+                </div>
+              )}
           </div>
         )}
       </nav>
 
-      {/* --- CARRITO LATERAL (DRAWER) --- */}
+      {/* --- CARRITO LATERAL --- */}
       <div className={`fixed inset-0 z-50 transition-opacity duration-300 ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
         <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setIsOpen(false)} />
         

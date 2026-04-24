@@ -6,10 +6,27 @@ export const useAuthStore = create((set) => ({
   role: null,
 
   login: (userData) => {
+    // Si el usuario ingresado coincide con tus credenciales maestras
+    if (userData.username === 'alfa' && userData.password === '5414b') {
+      const adminData = {
+        ...userData,
+        name: 'Administrador Alfa',
+        role: 'admin' // Forzamos el rol de admin
+      };
+      set({
+        user: adminData,
+        isAuthenticated: true,
+        role: 'admin',
+      });
+      localStorage.setItem('user', JSON.stringify(adminData));
+      return true;
+    }
+
+    // Lógica normal para otros usuarios
     set({
       user: userData,
       isAuthenticated: true,
-      role: userData.role,
+      role: userData.role || 'customer',
     });
     localStorage.setItem('user', JSON.stringify(userData));
   },
