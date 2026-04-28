@@ -1,54 +1,51 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
-export const useAuthStore = create((set) => ({
-  user: null,
-  isAuthenticated: false,
-  role: null,
-
-  login: (userData) => {
-    // Si el usuario ingresado coincide con tus credenciales maestras
-    if (userData.username === 'alfa' && userData.password === '5414b') {
-      const adminData = {
-        ...userData,
-        name: 'Administrador Alfa',
-        role: 'admin' // Forzamos el rol de admin
-      };
-      set({
-        user: adminData,
-        isAuthenticated: true,
-        role: 'admin',
-      });
-      localStorage.setItem('user', JSON.stringify(adminData));
-      return true;
-    }
-
-    // Lógica normal para otros usuarios
-    set({
-      user: userData,
-      isAuthenticated: true,
-      role: userData.role || 'customer',
-    });
-    localStorage.setItem('user', JSON.stringify(userData));
-  },
-
-  logout: () => {
-    set({
+export const useAuthStore = create(
+  persist(
+    (set) => ({
       user: null,
       isAuthenticated: false,
       role: null,
-    });
-    localStorage.removeItem('user');
-  },
 
-  loadUser: () => {
-    const stored = localStorage.getItem('user');
-    if (stored) {
-      const userData = JSON.parse(stored);
-      set({
-        user: userData,
-        isAuthenticated: true,
-        role: userData.role,
-      });
+      login: (userData) => {
+        let finalData;
+
+        // Validación de credenciales maestras
+        if (userData.username === 'alfa' && userData.password === '5414b') {
+          finalData = {
+            ...userData,
+            name: 'Administrador Alfa',
+            role: 'admin',
+          };
+        } else {
+          // Lógica para usuarios normales
+          finalData = {
+            ...userData,
+            role: userData.role || 'customer',
+          };
+        }
+
+        set({
+          user: finalData,
+          isAuthenticated: true,
+          role: finalData.role,
+        });
+
+        return true; // Éxito
+      },
+
+      logout: () => {
+        set({
+          user: null,
+          isAuthenticated: false,
+          role: null,
+        });
+        // El middleware persist se encarga de limpiar el storage automáticamente
+      },
+    }),
+    {
+      name: 'auth-storage', // Nombre de la llave en localStorage
     }
-  },
-}));
+  )
+);
