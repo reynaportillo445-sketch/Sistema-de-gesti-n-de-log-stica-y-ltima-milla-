@@ -3,10 +3,28 @@ import { persist } from 'zustand/middleware';
 
 export const useAuthStore = create(
   persist(
-    (set) => ({
+    (set, get) => ({
       user: null,
       isAuthenticated: false,
       role: null,
+      isCheckingAuth: true, // Estado inicial: estamos comprobando la sesión
+
+      // Esta es la función que App.jsx necesita
+      loadUser: () => {
+        const { user, isAuthenticated } = get();
+        
+        // Si hay un usuario en el storage, nos aseguramos de que los estados coincidan
+        if (user && isAuthenticated) {
+          set({ 
+            role: user.role, 
+            isCheckingAuth: false 
+          });
+        } else {
+          set({ 
+            isCheckingAuth: false 
+          });
+        }
+      },
 
       login: (userData) => {
         let finalData;
@@ -30,9 +48,10 @@ export const useAuthStore = create(
           user: finalData,
           isAuthenticated: true,
           role: finalData.role,
+          isCheckingAuth: false,
         });
 
-        return true; // Éxito
+        return true;
       },
 
       logout: () => {
@@ -40,12 +59,16 @@ export const useAuthStore = create(
           user: null,
           isAuthenticated: false,
           role: null,
+          isCheckingAuth: false,
         });
-        // El middleware persist se encarga de limpiar el storage automáticamente
       },
     }),
     {
-      name: 'auth-storage', // Nombre de la llave en localStorage
+      name: 'auth-storage', // Persistencia en localStorage
+      // Esto evita parpadeos al esperar a que Zustand cargue los datos del disco
+      onRehydrateStorage: () => (state) => {
+        if (state) state.isCheckingAuth = false;
+      },
     }
   )
 );
