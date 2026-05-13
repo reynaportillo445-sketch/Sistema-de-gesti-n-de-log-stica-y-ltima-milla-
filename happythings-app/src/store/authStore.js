@@ -3,6 +3,7 @@ import { persist } from 'zustand/middleware';
 
 export const useAuthStore = create(
   persist(
+<<<<<<< HEAD
     (set, get) => ({
       user: null,
       isAuthenticated: false,
@@ -26,6 +27,13 @@ export const useAuthStore = create(
         }
       },
 
+=======
+    (set) => ({
+      user: null,
+      isAuthenticated: false,
+      role: null,
+
+>>>>>>> d59349199965a60cc80094269ce84230c602cbf1
       login: (userData) => {
         let finalData;
 
@@ -48,10 +56,16 @@ export const useAuthStore = create(
           user: finalData,
           isAuthenticated: true,
           role: finalData.role,
+<<<<<<< HEAD
           isCheckingAuth: false,
         });
 
         return true;
+=======
+        });
+
+        return true; // Éxito
+>>>>>>> d59349199965a60cc80094269ce84230c602cbf1
       },
 
       logout: () => {
@@ -59,6 +73,7 @@ export const useAuthStore = create(
           user: null,
           isAuthenticated: false,
           role: null,
+<<<<<<< HEAD
           isCheckingAuth: false,
         });
       },
@@ -69,6 +84,14 @@ export const useAuthStore = create(
       onRehydrateStorage: () => (state) => {
         if (state) state.isCheckingAuth = false;
       },
+=======
+        });
+        // El middleware persist se encarga de limpiar el storage automáticamente
+      },
+    }),
+    {
+      name: 'auth-storage', // Nombre de la llave en localStorage
+>>>>>>> d59349199965a60cc80094269ce84230c602cbf1
     }
   )
 );
